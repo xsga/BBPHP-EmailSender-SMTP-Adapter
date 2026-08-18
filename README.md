@@ -1,0 +1,1 @@
+# BBPHP-EmailSender-SMTP-Adapter

@@ -19,18 +19,11 @@
       "email": "parker@xsga.es"
     }
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/xsga/BBPHP-EmailSender-Core.git",
-      "no-api": true
-    }
-  ],
   "require": {
     "php": "^8.4",
     "psr/log": "^3.0",
     "phpmailer/phpmailer": "^7.0",
-    "xsga/bbphp-emailsender-core": "dev-master"
+    "xsga/bbphp-emailsender-core": "^1.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^4.0",
@@ -40,24 +33,17 @@
     "php-parallel-lint/php-console-highlighter": "^1.0"
   },
   "autoload": {
-    "files": [
-    ],
     "psr-4": {
       "Xsga\\BBPHP\\EmailSender\\Adapter\\Smtp\\": "Src/Xsga/BBPHP-EmailSender-SMTP-Adapter/"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-
-    }
-  },
   "scripts": {
     "lint": "parallel-lint --exclude vendor .",
-    "style": "phpcs -p --colors --standard=PSR12 Bin Config Public Src",
-    "style-fix": "phpcbf -p --standard=PSR12 Bin Config Public Src",
+    "style": "phpcs -p --colors --standard=PSR12 Src",
+    "style-fix": "phpcbf -p --standard=PSR12 Src",
     "analyze-errors": "psalm --output-format=console --show-info=false --no-cache",
     "analyze-info": "psalm --output-format=console --show-info=true --no-cache",
-    "analyze-md": "phpmd Bin,Config,Public,Src ansi cleancode,codesize,controversial,design,naming,unusedcode",
+    "analyze-md": "phpmd Src ansi cleancode,codesize,controversial,design,naming,unusedcode",
     "phploc": "phploc Src"
   },
   "config": {

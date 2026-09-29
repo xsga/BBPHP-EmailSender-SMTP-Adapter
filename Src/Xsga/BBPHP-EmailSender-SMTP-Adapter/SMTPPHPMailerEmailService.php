@@ -27,11 +27,12 @@ final class SMTPPHPMailerEmailService implements SendEmailService
 
     public function send(EmailDataDto $emailData): void
     {
-        $this->configureServer();
-        $this->prepareEmail($emailData);
-
         try {
+            $this->configureServer();
+            $this->prepareEmail($emailData);
+
             $this->phpMailer->send();
+
             $this->logger->info('Email sent successfully using PHPMailer SMTP service', [
                 'event' => 'email.phpmailer.send.success',
                 'recipients' => $emailData->recipients,
@@ -70,6 +71,7 @@ final class SMTPPHPMailerEmailService implements SendEmailService
     private function prepareEmail(EmailDataDto $emailData): void
     {
         $this->phpMailer->setFrom($emailData->sender, $emailData->senderName);
+        $this->phpMailer->clearAllRecipients();
 
         $this->setRecipients($emailData);
         $this->setRecipientsCC($emailData);
@@ -79,8 +81,6 @@ final class SMTPPHPMailerEmailService implements SendEmailService
 
     private function setRecipients(EmailDataDto $emailData): void
     {
-        $this->phpMailer->clearAllRecipients();
-
         foreach ($emailData->recipients as $recipient) {
             $this->phpMailer->addAddress($recipient);
         }
